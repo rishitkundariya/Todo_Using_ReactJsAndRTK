@@ -2,16 +2,12 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { removeTodo } from "../features/todo/todoSlice";
 
-export default function TodoList({ todo }) {
+export default function TodoList({ todo, editTodoClickEvent }) {
   const [todoMsg, setTodoMsg] = useState(todo.text);
   const dispatch = useDispatch();
   const toggleCompletedEvent = () => {
     //toggleCompleted(todo.id);
     setIsTodoEditable();
-  };
-  const editTodo = () => {
-    //updateTodo(todo.id, { ...todo, todo: todoMsg });
-    setIsTodoEditable(false);
   };
   const [isTodoEditable, setIsTodoEditable] = useState(false);
   return (
@@ -39,7 +35,7 @@ export default function TodoList({ todo }) {
       <button
         className="inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0 disabled:opacity-50"
         onClick={() => {
-          console.log("Click");
+          editTodoClickEvent(todo.id);
         }}
         disabled={todo.complete}
       >
@@ -48,7 +44,7 @@ export default function TodoList({ todo }) {
       {/* Delete Todo Button */}
       <button
         className="inline-flex w-8 h-8 rounded-lg text-sm border border-black/10 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0"
-        onClick={() => dispatch(removeTodo(todo.id))}
+        onClick={() => dispatch(removeTodo({ id: todo.id }))}
       >
         ❌
       </button>
