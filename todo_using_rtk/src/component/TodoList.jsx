@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { removeTodo } from "../features/todo/todoSlice";
 
 export default function TodoList({ todo, editTodoClickEvent }) {
   const [todoMsg, setTodoMsg] = useState(todo.text);
+  useEffect(() => {
+    setTodoMsg(todo.text);
+  }, [todo.text]);
+  console.log(todo);
   const dispatch = useDispatch();
   const toggleCompletedEvent = () => {
     //toggleCompleted(todo.id);

@@ -1,6 +1,6 @@
 import "./App.css";
 import { TodoList, TodoForm } from "./component";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -26,13 +26,11 @@ function App() {
         <div className="flex flex-wrap gap-y-3">
           {todos.map((todo) => {
             return (
-              <div key={todo.text}>
-                <TodoList
-                  key={todo.id}
-                  todo={todo}
-                  editTodoClickEvent={calledFuction}
-                ></TodoList>
-              </div>
+              <TodoList
+                key={todo.id}
+                todo={todo}
+                editTodoClickEvent={calledFuction}
+              ></TodoList>
             );
           })}
         </div>
